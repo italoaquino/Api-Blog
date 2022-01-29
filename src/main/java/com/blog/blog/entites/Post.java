@@ -21,6 +21,12 @@ public class Post {
     private String tittle;
 
     @NotBlank
+    private String subtittle;
+
+    @NotBlank
+    private String author;
+
+    @NotBlank
     private String text;
 
     private String guid;
@@ -31,11 +37,29 @@ public class Post {
     public Post(){
     }
 
-    public Post(String tittle, String text, LocalDateTime date, String guid){
+    public Post(String tittle, String text, LocalDateTime date, String guid, String subtittle, String author){
         this.tittle = tittle;
         this.text = text;
         this.date = date;
         this.guid = guid;
+        this.subtittle =subtittle;
+        this.author = author;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setSubtittle(String subtittle) {
+        this.subtittle = subtittle;
+    }
+
+    public String getSubtittle() {
+        return subtittle;
     }
 
     public String getGuid() {

@@ -25,10 +25,7 @@ public class PostService {
 
     public Optional<Post> findByGuid(String guid){
         Optional<Post> post = this.repository.findByGuid(guid);
-        if(!post.isPresent()){
-            throw new ObjectNotFound("Objeto não encontrado!");
-        }
-        return post;
+        return Optional.ofNullable(post.orElseThrow(() -> new ObjectNotFound("Objeto não encontrado!")));
     }
 
     public Post add(Post post){
@@ -45,6 +42,8 @@ public class PostService {
         p1.get().setTittle(post.getTittle());
         p1.get().setText(post.getText());
         p1.get().setDate(post.getDate());
+        p1.get().setAuthor(post.getAuthor());
+        p1.get().setSubtittle(post.getSubtittle());
         p1.get().setDate(LocalDateTime.now());
         return this.repository.save(p1.get());
     }
