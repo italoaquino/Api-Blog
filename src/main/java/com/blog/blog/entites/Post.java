@@ -17,16 +17,16 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Tittle é obrigatório")
     private String tittle;
 
-    @NotBlank
+    @NotBlank(message = "subtittle é obrigatorio")
     private String subtittle;
 
-    @NotBlank
+    @NotBlank(message = "author é obrigatório")
     private String author;
 
-    @NotBlank
+    @NotBlank(message = "text é obrigatório")
     private String text;
 
     private String guid;
@@ -34,16 +34,29 @@ public class Post {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd' : 'HH:mm:ss", timezone="GMT")
     private LocalDateTime date;
 
+    @ManyToOne
+    @JoinColumn(name="category_id", nullable=false)
+    private Category category;
+
     public Post(){
     }
 
-    public Post(String tittle, String text, LocalDateTime date, String guid, String subtittle, String author){
+    public Post(String tittle, String text, LocalDateTime date, String guid, String subtittle, String author, Category category){
         this.tittle = tittle;
         this.text = text;
         this.date = date;
         this.guid = guid;
-        this.subtittle =subtittle;
+        this.subtittle = subtittle;
         this.author = author;
+        this.category = category;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getAuthor() {
