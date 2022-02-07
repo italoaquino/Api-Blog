@@ -1,12 +1,14 @@
 package com.blog.blog.service;
 
 import com.blog.blog.dtos.CategoryDTO;
+import com.blog.blog.dtos.PostDTO;
 import com.blog.blog.entites.Category;
 import com.blog.blog.entites.Post;
 import com.blog.blog.exception.ObjectNotFound;
 import com.blog.blog.repositories.CategoryRepository;
 import com.blog.blog.repositories.PostRepository;
 import com.github.javafaker.Cat;
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,9 +36,7 @@ public class CategoryService {
     }
 
     public Category addCategory(CategoryDTO categoryDTO){
-        Category cat = new Category();
-        cat.setName(categoryDTO.getName());
-        cat.setGuid(UUID.randomUUID().toString());
+        Category cat = toEntity(categoryDTO);
         cat.setDate(LocalDateTime.now());
         return this.repository.save(cat);
     }
@@ -54,5 +54,9 @@ public class CategoryService {
         this.repository.delete(category.get());
     }
 
+    public Category toEntity(CategoryDTO categoryDTO){
+        Category c1 = new Category(categoryDTO.getName(), categoryDTO.getDate());
+        return c1;
+    }
 
 }

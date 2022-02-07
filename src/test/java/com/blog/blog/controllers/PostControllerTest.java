@@ -30,7 +30,7 @@ public class PostControllerTest {
 
     @Test
     public void testaRequisicaoGuidSucesso() throws Exception {
-        String url = "/v1/posts/facb2ab4-f46a-44b5-abd5-c70b851d97da";
+        String url = "/v1/posts/ae9435f5-e90d-4b74-ae35-91946ecba9d7";
         this.mvc.perform(get(url))
                 .andExpect(status().isOk());
     }

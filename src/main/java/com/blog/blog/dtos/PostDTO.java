@@ -7,14 +7,15 @@ import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Builder
 @Getter
 public class PostDTO {
 
-    private Long Category_id;
+    private Long category_id;
 
-    @NotBlank
+
     private String guid;
 
     @NotBlank
@@ -41,6 +42,8 @@ public class PostDTO {
                 .text(post.getText())
                 .author(post.getAuthor())
                 .date(post.getDate())
+                .guid(post.getGuid())
+                .category_id(post.getCategory().getId())
                 .build();
 
     }

@@ -1,5 +1,6 @@
 package com.blog.blog.controllers;
 
+import com.blog.blog.dtos.CategoryDTO;
 import com.blog.blog.dtos.PostDTO;
 import com.blog.blog.entites.Post;
 import com.blog.blog.exception.ObjectNotFound;
@@ -47,9 +48,7 @@ public class PostController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseEntity<Void> add(@Valid @RequestBody PostDTO postDTO){
-      Post post = this.service.add(
-              postDTO.getTittle(), postDTO.getSubtittle(), postDTO.getAuthor(), postDTO.getText(), postDTO.getCategory_id()
-      );
+      Post post = this.service.add(postDTO);
       return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -58,7 +57,7 @@ public class PostController {
         if (result.hasErrors()) {
             throw new ValidationException("error: "+result);
         }
-        this.service.update(postDTO.getTittle(), postDTO.getSubtittle(), postDTO.getAuthor(), postDTO.getText(), postDTO.getCategory_id(), guid);
+        this.service.update(postDTO, guid);
         return ResponseEntity.noContent().build();
     }
 

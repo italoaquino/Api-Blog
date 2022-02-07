@@ -13,8 +13,6 @@ import java.time.LocalDateTime;
 @Builder
 public class CategoryDTO {
 
-    private Long id;
-
     private String guid;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd' : 'HH:mm:ss", timezone="GMT")
@@ -25,7 +23,6 @@ public class CategoryDTO {
 
     public static CategoryDTO toDTO(Category category){
         return CategoryDTO.builder()
-                .id(category.getId())
                 .guid(category.getGuid())
                 .date(category.getDate())
                 .name(category.getName())

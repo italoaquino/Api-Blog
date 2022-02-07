@@ -2,6 +2,7 @@ package com.blog.blog.entites;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
 
 
 import javax.persistence.*;
@@ -11,22 +12,27 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tb_post")
+@Data
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Tittle é obrigatório")
+    @NotBlank
+    @Column(nullable = false, length = 100)
     private String tittle;
 
-    @NotBlank(message = "subtittle é obrigatorio")
+    @NotBlank
+    @Column(nullable = false, length = 100)
     private String subtittle;
 
-    @NotBlank(message = "author é obrigatório")
+    @NotBlank
+    @Column(nullable = false, length = 100)
     private String author;
 
-    @NotBlank(message = "text é obrigatório")
+    @NotBlank
+    @Column(nullable = false)
     private String text;
 
     private String guid;
@@ -41,54 +47,14 @@ public class Post {
     public Post(){
     }
 
-    public Post(String tittle, String text, LocalDateTime date, String guid, String subtittle, String author, Category category){
-        this.tittle = tittle;
+    public Post(String text, String tittle, String author, String subtittle, LocalDateTime date, Category category)
+    {
         this.text = text;
-        this.date = date;
-        this.guid = guid;
-        this.subtittle = subtittle;
+        this.tittle = tittle;
         this.author = author;
-        this.category = category;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setSubtittle(String subtittle) {
         this.subtittle = subtittle;
-    }
-
-    public String getSubtittle() {
-        return subtittle;
-    }
-
-    public String getGuid() {
-        return guid;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
         this.date = date;
+        this.category = category;
     }
 
     public Long getId() {
@@ -99,12 +65,12 @@ public class Post {
         this.id = id;
     }
 
-    public String getText() {
-        return text;
+    public String getSubtittle() {
+        return subtittle;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setSubtittle(String subtittle) {
+        this.subtittle = subtittle;
     }
 
     public String getTittle() {
@@ -114,4 +80,46 @@ public class Post {
     public void setTittle(String tittle) {
         this.tittle = tittle;
     }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getGuid(@NotBlank String guid) {
+        return this.guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+
 }
